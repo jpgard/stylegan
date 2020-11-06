@@ -14,6 +14,7 @@ import uuid
 import sys
 import numpy as np
 import tensorflow as tf
+tf.compat.v1.disable_eager_execution()
 
 from collections import OrderedDict
 from typing import Any, List, Tuple, Union
@@ -199,6 +200,9 @@ class Network:
 
     def get_output_for(self, *in_expr: TfExpression, return_as_list: bool = False, **dynamic_kwargs) -> Union[TfExpression, List[TfExpression]]:
         """Construct TensorFlow expression(s) for the output(s) of this network, given the input expression(s)."""
+        print("[DEBUG] in_expr: {}".format(str(in_expr)))
+        print("[DEBUG] len(in_expr): {}".format(len(in_expr)))
+        print("[DEBUG] self.num_inputs: {}".format(self.num_inputs))
         assert len(in_expr) == self.num_inputs
         assert not all(expr is None for expr in in_expr)
 
